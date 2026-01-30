@@ -110,6 +110,10 @@ nav a:hover {
   width: 45%;
   text-align: right;
 }
+.hero-right img {
+    max-width: 390px;
+    border-radius: 100%;
+}
 
 .hero-right img {
   max-width: 380px;
