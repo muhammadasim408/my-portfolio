@@ -1,180 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammad Asim - WordPress Developer Portfolio</title>
-    <style>
-        /* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    color: #333;
-    line-height: 1.6;
-}
-
-a {
-    text-decoration: none;
-    color: #fff;
-}
-
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
-}
-
-/* Hero Section */
-.hero {
-    background: #111;
-    color: #fff;
-    text-align: center;
-    padding: 100px 0;
-}
-
-.hero h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
-}
-
-.hero p {
-    font-size: 20px;
-    margin-bottom: 30px;
-}
-
-.btn {
-    background: #ff4a57;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-weight: bold;
-}
-
-/* Sections */
-.section {
-    padding: 80px 0;
-    text-align: center;
-}
-
-.section h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
-
-.section p {
-    max-width: 700px;
-    margin: 0 auto 20px auto;
-}
-
-/* Projects Grid */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
-}
-
-.project-item {
-    background: #f4f4f4;
-    border-radius: 10px;
-    padding: 20px;
-    transition: transform 0.3s ease;
-}
-
-.project-item:hover {
-    transform: translateY(-5px);
-}
-
-.project-item img {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 15px;
-}
-
-.btn-small {
-    display: inline-block;
-    background: #111;
-    color: #fff;
-    padding: 8px 15px;
-    border-radius: 5px;
-    margin-top: 10px;
-}
-
-/* Footer */
-.footer {
-    background: #111;
-    color: #fff;
-    text-align: center;
-    padding: 20px 0;
-}
-
-/* Responsive */
-@media(max-width: 768px){
-    .hero h1 {
-        font-size: 36px;
-    }
-
-    .hero p {
-        font-size: 18px;
-    }
-}
-
-    </style>
+  <meta charset="UTF-8">
+  <title>Hero Section</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Header / Hero Section -->
-    <header class="hero">
-        <div class="container">
-            <h1>Hello, I'm Muhammad Asim</h1>
-            <p>Senior WordPress Developer | Creating high-performing, beautiful websites</p>
-            <a href="#projects" class="btn">View My Work</a>
-        </div>
-    </header>
 
-    <!-- About Me Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <h2>About Me</h2>
-            <p>I am a passionate WordPress developer with experience in building custom websites, optimizing performance, and enhancing user experience. I specialize in Elementor, custom themes, and plugin integrations.</p>
-        </div>
-    </section>
+<header class="navbar">
+  <div class="logo">&lt;Vijay Singh/&gt;</div>
+  <nav>
+    <a class="active" href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Skills</a>
+    <a href="#">Projects</a>
+    <a href="#">Blogs</a>
+    <a href="#">Contact</a>
+  </nav>
+</header>
 
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-        <div class="container">
-            <h2>My Projects</h2>
-            <div class="projects-grid">
-                <!-- Project Item -->
-                <div class="project-item">
-                    <img src="images/project1.png" alt="Project 1">
-                    <h3>Project Name 1</h3>
-                    <p>Brief description of the project.</p>
-                    <a href="https://example.com/project1" target="_blank" class="btn-small">View Project</a>
-                </div>
-                <div class="project-item">
-                    <img src="images/project2.png" alt="Project 2">
-                    <h3>Project Name 2</h3>
-                    <p>Brief description of the project.</p>
-                    <a href="https://example.com/project2" target="_blank" class="btn-small">View Project</a>
-                </div>
-                <!-- Add more project items as needed -->
-            </div>
-        </div>
-    </section>
+<section class="hero">
+  <div class="hero-left">
+    <h4>Namasté, I'm</h4>
+    <h1>Vijay <span>Singh</span></h1>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-        <div class="container">
-            <h2>Contact Me</h2>
-            <p>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
-            <p>Phone: +92 300 1234567</p>
-            <p>GitHub: <a href="https://github.com/muhammadasim408" target="_blank">github.com/muhammadasim408</a></p>
-        </div>
-    </section>
+    <span class="badge">✨ Frontend Developer</span>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2026 Muhammad Asim | WordPress Developer</p>
-    </footer>
+    <p>
+      Started unintentionally with messy Discord bot templates in 2021.
+      Now, creating beautiful and responsive websites and templates for
+      everyone to explore! But this time <span>intentionally</span>.
+    </p>
+
+    <div class="buttons">
+      <a href="#" class="btn primary">Contact Me</a>
+      <a href="#" class="btn secondary">View Portfolio</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <img src="your-image.png" alt="Profile Image">
+  </div>
+</section>
+
 </body>
 </html>
