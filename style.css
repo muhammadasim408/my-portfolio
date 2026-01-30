@@ -19,8 +19,7 @@ body {
 }
 
 .logo {
-  font-size: 20px;
-  font-weight: 600;
+ width:20%;
 }
 
 nav a {
