@@ -1,48 +1,951 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Hero Section</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Asim — WordPress Developer</title>
+<meta name="description" content="Muhammad Asim — WordPress Developer. Custom, scalable, performance-driven WordPress solutions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root{
+    /* ===== v1 palette (hero / about / services / contact) ===== */
+    --navy-950: #0b1220;
+    --navy-900: #0f1a2e;
+    --navy-800: #16233d;
+    --navy-700: #1f3153;
+    --paper: #f3efe6;
+    --paper-dim: #cfd4dc;
+    --amber: #ffb648;
+    --amber-soft: #ffd596;
+    --line-v1: rgba(243,239,230,0.12);
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+    --grotesk: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    /* ===== v2 palette (skills / experience / work) ===== */
+    --ink: #0e0e10;
+    --ink-soft: #18181b;
+    --surface: #1d1d20;
+    --line: rgba(250,250,248,0.10);
+    --line-soft: rgba(250,250,248,0.06);
+    --off-white: #faf9f6;
+    --grey: #9a9a9f;
+    --grey-dim: #6e6e74;
+    --slate: #7d9bc1;
+    --slate-deep: #5478a6;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  /* base body uses v1 ground (navy-950) since hero/about/services/contact dominate visually and nav sits on top of hero */
+  body{
+    background:var(--navy-950);
+    color:var(--paper);
+    font-family:var(--grotesk);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* subtle grid texture background, v1 signature */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      linear-gradient(rgba(243,239,230,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(243,239,230,0.025) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  ::selection{ background:var(--amber); color:var(--navy-950); }
+  a{ color:inherit; text-decoration:none; }
+
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 32px;
+    position:relative;
+    z-index:1;
+  }
+
+  /* ===== v1 eyebrow (hero/about/services/contact) ===== */
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--amber);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:7px; height:7px;
+    background:var(--amber);
+    border-radius:1px;
+    display:inline-block;
+    animation:blink 1.6s steps(1) infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0.15; } }
+
+  /* ===== v2 eyebrow (skills/experience/work) ===== */
+  .eyebrow-v2{
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:12px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--slate);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:20px;
+  }
+  .eyebrow-v2::before{
+    content:"";
+    width:24px; height:1px;
+    background:var(--slate);
+    display:inline-block;
+  }
+
+  /* ===== NAV (v1 styling) ===== */
+  header{
+    position:fixed; top:0; left:0; right:0;
+    z-index:100;
+    backdrop-filter:blur(14px) saturate(140%);
+    background:rgba(11,18,32,0.72);
+    border-bottom:1px solid var(--line-v1);
+  }
+  nav{
+    max-width:1120px;
+    margin:0 auto;
+    padding:18px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo{
+    display:flex;
+    align-items:center;
+  }
+  .logo img{
+    height:36px;
+    width:auto;
+    display:block;
+  }
+  .nav-links{
+    display:flex;
+    gap:36px;
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:0.02em;
+  }
+  .nav-links a{
+    color:var(--paper-dim);
+    position:relative;
+    padding-bottom:3px;
+    transition:color .25s ease;
+  }
+  .nav-links a::after{
+    content:"";
+    position:absolute; left:0; bottom:0;
+    width:0; height:1px;
+    background:var(--amber);
+    transition:width .3s ease;
+  }
+  .nav-links a:hover{ color:var(--paper); }
+  .nav-links a:hover::after{ width:100%; }
+  .nav-cta{
+    font-family:var(--mono);
+    font-size:13px;
+    border:1px solid rgba(243,239,230,0.25);
+    padding:8px 16px;
+    border-radius:3px;
+    transition:all .25s ease;
+  }
+  .nav-cta:hover{ border-color:var(--amber); color:var(--amber); }
+
+  /* ===== HERO (v1) ===== */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding-top:90px;
+    position:relative;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:64px;
+    align-items:center;
+    width:100%;
+  }
+  .hero h1{
+    font-size:clamp(40px, 5.6vw, 68px);
+    line-height:1.04;
+    letter-spacing:-0.025em;
+    font-weight:700;
+    margin-bottom:22px;
+  }
+  .hero h1 .accent{ color:var(--amber); }
+  .hero p.lede{
+    font-size:17px;
+    line-height:1.7;
+    color:var(--paper-dim);
+    max-width:520px;
+    margin-bottom:34px;
+  }
+  .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{
+    font-family:var(--mono);
+    font-size:13.5px;
+    padding:13px 24px;
+    border-radius:3px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition:all .25s ease;
+    cursor:pointer;
+    border:1px solid transparent;
+  }
+  .btn-primary{
+    background:var(--amber);
+    color:var(--navy-950);
+    font-weight:600;
+  }
+  .btn-primary:hover{ background:var(--amber-soft); transform:translateY(-2px); }
+  .btn-ghost{
+    border-color:rgba(243,239,230,0.25);
+    color:var(--paper);
+  }
+  .btn-ghost:hover{ border-color:var(--paper); transform:translateY(-2px); }
+
+  /* code window signature element */
+  .code-window{
+    background:var(--navy-900);
+    border:1px solid var(--line-v1);
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 30px 80px -20px rgba(0,0,0,0.6);
+    transform:perspective(1000px) rotateY(-4deg) rotateX(2deg);
+    animation:float 6s ease-in-out infinite;
+  }
+  @keyframes float{
+    0%,100%{ transform:perspective(1000px) rotateY(-4deg) rotateX(2deg) translateY(0); }
+    50%{ transform:perspective(1000px) rotateY(-4deg) rotateX(2deg) translateY(-12px); }
+  }
+  .code-titlebar{
+    display:flex; align-items:center; gap:8px;
+    padding:12px 16px;
+    background:var(--navy-800);
+    border-bottom:1px solid var(--line-v1);
+  }
+  .dot{ width:10px; height:10px; border-radius:50%; }
+  .dot.r{ background:#ff5f56; }
+  .dot.y{ background:#ffbd2e; }
+  .dot.g{ background:#27c93f; }
+  .code-filename{
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--paper-dim);
+    margin-left:8px;
+  }
+  .code-body{
+    padding:24px 22px;
+    font-family:var(--mono);
+    font-size:13px;
+    line-height:1.9;
+  }
+  .code-body .ln{ color:#5a6680; user-select:none; margin-right:18px; }
+  .code-body .kw{ color:#ff8fb1; }
+  .code-body .fn{ color:#7ec8ff; }
+  .code-body .str{ color:#a8e6a3; }
+  .code-body .prop{ color:var(--amber-soft); }
+  .cursor-blink{
+    display:inline-block;
+    width:7px; height:15px;
+    background:var(--amber);
+    vertical-align:middle;
+    animation:blink 1s steps(1) infinite;
+  }
+
+  /* ===== SECTION HEADERS v1 (about / services / contact) ===== */
+  section{ padding:120px 0; position:relative; border-bottom:1px solid var(--line-v1); }
+  section:last-of-type{ border-bottom:none; }
+  .section-head{ margin-bottom:56px; max-width:640px; }
+  .section-head h2{
+    font-size:clamp(30px,3.4vw,42px);
+    font-weight:700;
+    letter-spacing:-0.02em;
+    line-height:1.15;
+  }
+  .section-head p{
+    color:var(--paper-dim);
+    font-size:16px;
+    margin-top:14px;
+    line-height:1.7;
+  }
+
+  /* ===== SECTION HEADERS v2 (skills / experience / work) ===== */
+  .section-head-v2{ margin-bottom:64px; max-width:680px; }
+  .section-head-v2 h2{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:clamp(32px,3.6vw,46px);
+    letter-spacing:-0.02em;
+    line-height:1.15;
+    color:var(--off-white);
+  }
+  .section-head-v2 h2 em{ font-style:italic; color:var(--slate); font-weight:300; }
+  .section-head-v2 p{
+    color:var(--grey);
+    font-size:16px;
+    margin-top:16px;
+    line-height:1.7;
+  }
+
+  /* ===== ABOUT (v1) ===== */
+  .about-row{
+    display:grid;
+    grid-template-columns:1.5fr 1.1fr;
+    gap:64px;
+    align-items:start;
+  }
+  .about-row p{
+    color:var(--paper-dim);
+    font-size:16.5px;
+    line-height:1.85;
+  }
+  .stat-grid{
+    display:grid;
+    margin-top: -140px;
+    grid-template-columns:repeat(1,1fr);
+    gap:20px;
+  }
+  .stat-card{
+    border:1px solid var(--line-v1);
+    border-radius:8px;
+    padding:24px 20px;
+    background:linear-gradient(180deg, rgba(255,182,72,0.04), transparent);
+    transition:border-color .3s ease, transform .3s ease;
+  }
+  .stat-card:hover{ border-color:rgba(255,182,72,0.4); transform:translateY(-4px); }
+  .stat-num{
+    font-family:var(--mono);
+    font-size:32px;
+    font-weight:700;
+    color:var(--amber);
+  }
+  .stat-label{
+    font-size:13px;
+    color:var(--paper-dim);
+    margin-top:6px;
+  }
+
+  /* ===== SERVICES (v1) ===== */
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+  }
+  .service-card{
+    border:1px solid var(--line-v1);
+    border-radius:10px;
+    padding:32px 26px;
+    background:var(--navy-900);
+    transition:transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+    opacity:0;
+    transform:translateY(24px);
+  }
+  .service-card.in{ opacity:1; transform:translateY(0); }
+  .service-card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(255,182,72,0.4);
+    box-shadow:0 24px 50px -20px rgba(255,182,72,0.12);
+  }
+  .service-icon{
+    width:46px; height:46px;
+    border-radius:9px;
+    background:rgba(255,182,72,0.1);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:20px;
+    color:var(--amber);
+  }
+  .service-icon svg{ width:22px; height:22px; }
+  .service-card h3{
+    font-size:18px;
+    font-weight:600;
+    margin-bottom:10px;
+    letter-spacing:-0.01em;
+  }
+  .service-card p{
+    font-size:14.5px;
+    color:var(--paper-dim);
+    line-height:1.7;
+  }
+  .service-tag{
+    font-family:var(--mono);
+    font-size:11px;
+    color:rgba(255,182,72,0.55);
+    margin-bottom:14px;
+    display:block;
+    letter-spacing:0.06em;
+  }
+
+  /* ===== SKILLS (v2) ===== */
+  .skills-cols{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:48px;
+  }
+  .skill-group{
+    opacity:0;
+    transform:translateY(16px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .skill-group.in{ opacity:1; transform:translateY(0); }
+  .skill-group h4{
+    font-size:12.5px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--slate);
+    font-weight:600;
+    padding-bottom:16px;
+    margin-bottom:18px;
+    border-bottom:1px solid var(--line);
+  }
+  .skill-group ul{ list-style:none; }
+  .skill-group li{
+    font-size:15px;
+    color:var(--grey);
+    padding:9px 0;
+    border-bottom:1px solid var(--line-soft);
+    transition:color .2s ease, padding-left .2s ease;
+  }
+  .skill-group li:last-child{ border-bottom:none; }
+  .skill-group li:hover{ color:var(--off-white); padding-left:6px; }
+
+  /* ===== EXPERIENCE (v2) ===== */
+  .exp-list{ border-top:1px solid var(--line); }
+  .exp-row{
+    display:grid;
+    grid-template-columns:160px 1fr auto;
+    gap:32px;
+    align-items:baseline;
+    padding:32px 0;
+    border-bottom:1px solid var(--line);
+    opacity:0;
+    transform:translateY(16px);
+    transition:opacity .6s ease, transform .6s ease, background .3s ease;
+  }
+  .exp-row.in{ opacity:1; transform:translateY(0); }
+  .exp-row:hover{ background:var(--line-soft); }
+  .exp-date{
+    font-size:13px;
+    color:var(--grey-dim);
+    font-weight:500;
+  }
+  .exp-role{
+    font-family:var(--serif);
+    font-size:22px;
+    font-weight:400;
+    letter-spacing:-0.01em;
+    color:var(--off-white);
+  }
+  .exp-company{
+    font-size:13.5px;
+    color:var(--grey);
+    margin-top:4px;
+  }
+  .exp-current{
+    font-size:11.5px;
+    font-weight:600;
+    color:#6fcf7f;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    white-space:nowrap;
+  }
+
+  /* ===== WORK PORTFOLIO (v2) ===== */
+  .portfolio-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+  }
+  .port-card{
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:28px 24px;
+    background:var(--surface);
+    position:relative;
+    overflow:hidden;
+    transition:transform .35s ease, border-color .35s ease;
+    opacity:0;
+    transform:translateY(24px) scale(0.97);
+  }
+  .port-card.in{ opacity:1; transform:translateY(0) scale(1); }
+  .port-card::after{
+    content:"";
+    position:absolute; inset:0;
+    background:radial-gradient(circle at 80% 0%, rgba(125,155,193,0.14), transparent 60%);
+    opacity:0;
+    transition:opacity .35s ease;
+  }
+  .port-card:hover{ transform:translateY(-6px); border-color:rgba(125,155,193,0.35); }
+  .port-card:hover::after{ opacity:1; }
+  .port-icon{
+    width:42px; height:42px;
+    border-radius:9px;
+    background:var(--ink-soft);
+    border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:18px;
+    position:relative;
+    z-index:1;
+  }
+  .port-icon svg{ width:20px; height:20px; color:var(--slate); }
+  .port-card h3{
+    font-size:16.5px;
+    font-weight:600;
+    margin-bottom:8px;
+    position:relative; z-index:1;
+    word-break:break-word;
+    color:var(--off-white);
+  }
+  .port-card p{
+    font-size:13.5px;
+    color:var(--grey);
+    line-height:1.6;
+    margin-bottom:16px;
+    position:relative; z-index:1;
+  }
+  .port-link{
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:12.5px;
+    color:var(--slate);
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    position:relative; z-index:1;
+  }
+  .port-link svg{ width:13px; height:13px; transition:transform .25s ease; }
+  .port-card:hover .port-link svg{ transform:translate(3px,-3px); }
+
+  /* ===== CONTACT (v1) ===== */
+  .contact-box{
+    border:1px solid var(--line-v1);
+    border-radius:14px;
+    padding:64px 56px;
+    background:linear-gradient(160deg, rgba(255,182,72,0.06), transparent 60%);
+    text-align:center;
+  }
+  .contact-box h2{
+    font-size:clamp(28px,4vw,44px);
+    font-weight:700;
+    letter-spacing:-0.02em;
+    margin-bottom:16px;
+  }
+  .contact-box p{
+    color:var(--paper-dim);
+    font-size:16px;
+    margin-bottom:32px;
+  }
+  .contact-links{
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+
+  /* ===== FOOTER (v1) ===== */
+  footer{
+    border-top:1px solid var(--line-v1);
+    padding:32px 0;
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--paper-dim);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  footer a:hover{ color:var(--amber); }
+
+  /* reveal on scroll generic */
+  .reveal{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .about-row{ grid-template-columns:1fr; }
+    .services-grid{ grid-template-columns:repeat(2,1fr); }
+    .skills-cols{ grid-template-columns:1fr 1fr; gap:32px 40px; }
+    .portfolio-grid{ grid-template-columns:repeat(2,1fr); }
+    .nav-links{ display:none; }
+    .code-window{ transform:none; animation:none; }
+    .exp-row{ grid-template-columns:1fr; gap:6px; }
+    .exp-current{ order:-1; }
+  }
+  @media (max-width: 600px){
+    .wrap{ padding:0 20px; }
+    .services-grid{ grid-template-columns:1fr; }
+    .portfolio-grid{ grid-template-columns:1fr; }
+    .stat-grid{ grid-template-columns:1fr; }
+    .skills-cols{ grid-template-columns:1fr; gap:32px; }
+    .contact-box{ padding:44px 24px; }
+    nav{ padding:16px 20px; }
+    .hero{ padding-top:80px; }
+    section{ padding:90px 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+</style>
 </head>
 <body>
 
-<header class="navbar">
-  <div class="logo"><img src="logo.png" alt="Muhammad Asm Logo"></div>
+<header>
   <nav>
-    <a class="active" href="#">Home</a>
-    <a href="#">About</a>
-    <a href="#">Skills</a>
-    <a href="#">Projects</a>
-    <a href="#">Contact</a>
+    <div class="logo"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCAxNjAgNDAiPgogIDxyZWN0IHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIHJ4PSI0IiBmaWxsPSIjMTYyMzNkIiBzdHJva2U9IiNmZmI2NDgiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWRhc2hhcnJheT0iNCAzIi8+CiAgPHRleHQgeD0iODAiIHk9IjI1IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjEyIiBmaWxsPSIjZmZiNjQ4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5ZT1VSIExPR088L3RleHQ+Cjwvc3ZnPgo=" alt="Muhammad Asim logo — replace with your own image"></div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#services">Services</a>
+      <a href="#experience">Experience</a>
+      <a href="#work">Work</a>
+    </div>
+    <a href="#contact" class="nav-cta">Get in touch</a>
   </nav>
 </header>
 
-<section class="hero">
-  <div class="hero-left">
-    <h1>Muhammad <span>Asim</span></h1>
+<main class="wrap">
 
-    <span class="badge">Web Developer</span>
-
-    <p>
-      Hi, I’m Muhammad Asim
-     I am a professional WordPress Developer with experience in designing and developing modern, 
-     responsive, and high-performing websites. I specialize in custom WordPress development, 
-     theme customization, and creating user-friendly websites tailored to business needs.<br>
-     I focus on clean code, performance, and usability to deliver reliable, scalable, 
-     and professional WordPress solutions that help businesses grow online.
-    </p>
-
-    <div class="buttons">
-      <a href="#" class="btn primary">Contact Me</a>
-      <a href="#" class="btn secondary">View Portfolio</a>
+  <!-- HERO (v1 style) -->
+  <section class="hero" id="top">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Available for freelance work</div>
+        <h1>Building <span class="accent">WordPress</span> sites that load fast and never break.</h1>
+        <p class="lede">I'm a Full Stack WordPress Developer with 4+ years of experience designing, developing, and maintaining custom, scalable, performance-driven websites — built on clean code and long-term maintainability.</p>
+        <div class="hero-actions">
+          <a href="#work" class="btn btn-primary">View my work →</a>
+          <a href="#contact" class="btn btn-ghost">Contact me</a>
+        </div>
+      </div>
+      <div class="code-window">
+        <div class="code-titlebar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="code-filename">developer.php</span>
+        </div>
+        <div class="code-body">
+          <div><span class="ln">01</span><span class="kw">class</span> <span class="fn">Developer</span> {</div>
+          <div><span class="ln">02</span>&nbsp;&nbsp;<span class="prop">$name</span> = <span class="str">'Muhammad Asim'</span>;</div>
+          <div><span class="ln">03</span>&nbsp;&nbsp;<span class="prop">$role</span> = <span class="str">'Web Dev'</span>;</div>
+          <div><span class="ln">04</span>&nbsp;&nbsp;<span class="prop">$experience</span> = <span class="str">'4+ years'</span>;</div>
+          <div><span class="ln">05</span>&nbsp;&nbsp;<span class="prop">$stack</span> = [<span class="str">'Elementor'</span>,</div>
+          <div><span class="ln">06</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'Divi'</span>, <span class="str">'CPT'</span>, <span class="str">'SEO'</span>];</div>
+          <div><span class="ln">07</span>}<span class="cursor-blink"></span></div>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div class="hero-right">
-    <img src="01.jpg" alt="Profile Image">
-  </div>
-</section>
+  <!-- ABOUT (v1 style) -->
+  <section id="about">
+    <div class="section-head reveal">
+      <div class="eyebrow">About</div>
+      <h2>Dedicated to clean code and long-term maintainability.</h2>
+    </div>
+    <div class="about-row">
+      <p class="reveal">I am a dedicated WordPress Developer with 4+ years of professional experience in designing, developing, and maintaining high-quality WordPress websites. I specialize in delivering custom, scalable, and performance-driven WordPress solutions tailored to business needs. With a strong command of WordPress core, themes, plugins, and modern page builders, I help clients build secure, SEO-friendly, and user-focused websites. I believe in clean coding standards, attention to detail, and long-term maintainability.</p>
+      <div class="stat-grid">
+        <!-- <div class="stat-card reveal"><div class="stat-num">4+</div><div class="stat-label">Years of experience</div></div> -->
+        <div class="stat-card reveal"><div class="stat-num">20+</div><div class="stat-label">Live websites shipped</div></div>
+        <div class="stat-card reveal"><div class="stat-num">3</div><div class="stat-label">Companies worked with</div></div>
+        <div class="stat-card reveal"><div class="stat-num">100%</div><div class="stat-label">Responsive builds</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES (v1 style) -->
+  <section id="services">
+    <div class="section-head reveal">
+      <div class="eyebrow">Services</div>
+      <h2>How I can help your business online.</h2>
+      <p>From a fresh build to fixing what's already broken, here's what I offer.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <span class="service-tag">01 / BUILD</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 9h18"></path><path d="M9 4v16"></path></svg>
+        </div>
+        <h3>Custom WordPress Development</h3>
+        <p>End-to-end WordPress builds using Elementor and Divi — pixel-perfect conversions from Figma, PSD, or Canva designs.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-tag">02 / SPEED</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"></path></svg>
+        </div>
+        <h3>Performance Optimization</h3>
+        <p>Speed audits and tuning so your site loads fast, ranks better, and keeps visitors from bouncing.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-tag">03 / PROTECT</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 9 8 11 4.6-2 8-6 8-11V5l-8-3z"></path></svg>
+        </div>
+        <h3>Security Hardening</h3>
+        <p>WordPress security best practices, backups, and restore plans so your site stays safe and recoverable.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-tag">04 / GROW</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"></path><path d="M21 7v6h-6"></path></svg>
+        </div>
+        <h3>SEO & Schema Setup</h3>
+        <p>Schema markup, Google Search Console configuration, and SEO-friendly structure built in from day one.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-tag">05 / MOVE</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8"></path><path d="M12 17v4"></path></svg>
+        </div>
+        <h3>Migration & Hosting Setup</h3>
+        <p>Smooth website migrations with cPanel setup, so you switch hosts or domains without losing a thing.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-tag">06 / CONTENT</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 12h8"></path><path d="M8 16h5"></path><path d="M8 8h8"></path></svg>
+        </div>
+        <h3>Custom Post Types & Content</h3>
+        <p>Tailored content structures with Custom Post Types, plus basic graphic design support for your visuals.</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- SKILLS (v2 style) -->
+  <section id="skills">
+    <div class="section-head-v2 reveal">
+      <div class="eyebrow-v2">Skills</div>
+      <h2>What I bring to <em>every build.</em></h2>
+    </div>
+    <div class="skills-cols" id="skillsWrap">
+      <div class="skill-group">
+        <h4>Build & Design</h4>
+        <ul>
+          <li>Elementor & Divi Page Builder</li>
+          <li>Custom Post Types (CPT)</li>
+          <li>Figma, PSD, Canva Conversion</li>
+          <li>Basic Graphic Design</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Performance & Security</h4>
+        <ul>
+          <li>Website Speed Optimization</li>
+          <li>WordPress Security Best Practices</li>
+          <li>Migration, Backup & Restore</li>
+          <li>cPanel Setup</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>SEO & Structure</h4>
+        <ul>
+          <li>Schema Markup Implementation</li>
+          <li>Google Search Console</li>
+          <li>Responsive, SEO-Friendly Structure</li>
+          <li>Social Posting</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE (v2 style) -->
+  <section id="experience">
+    <div class="section-head-v2 reveal">
+      <div class="eyebrow-v2">Experience</div>
+      <h2>Where I've <em>worked.</em></h2>
+    </div>
+    <div class="exp-list">
+      <div class="exp-row">
+        <span class="exp-date">Nov 2024 — Present</span>
+        <div>
+          <div class="exp-role">WordPress Developer</div>
+          <div class="exp-company">Mortgage Knight</div>
+        </div>
+        <span class="exp-current">Current role</span>
+      </div>
+      <div class="exp-row">
+        <span class="exp-date">May 2024 — Nov 2024</span>
+        <div>
+          <div class="exp-role">WordPress Front-End Developer</div>
+          <div class="exp-company">The 7 Technologies</div>
+        </div>
+        <span></span>
+      </div>
+      <div class="exp-row">
+        <span class="exp-date">Apr 2022 — May 2024</span>
+        <div>
+          <div class="exp-role">WordPress Developer</div>
+          <div class="exp-company">AsianITHouse</div>
+        </div>
+        <span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK / PORTFOLIO (v2 style) -->
+  <section id="work">
+    <div class="section-head-v2 reveal">
+      <div class="eyebrow-v2">Work Portfolio</div>
+      <h2>Websites I've designed and built.</h2>
+      <p>A selection of WordPress sites I've shipped for clients across different industries.</p>
+    </div>
+    <div class="portfolio-grid" id="workGrid">
+
+      <div class="port-card">
+        <div class="port-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 9h18"></path></svg></div>
+        <h3>Auction Finance UK</h3>
+        <p>Finance services site built for the UK auction-property lending market.</p>
+        <a class="port-link" href="https://auctionfinanceuk.cm/" target="_blank" rel="noopener">Visit site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
+      </div>
+
+      <div class="port-card">
+        <div class="port-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M5 21V8l7-5 7 5v13"></path><path d="M9 21v-6h6v6"></path></svg></div>
+        <h3>Watford Boiler Repair</h3>
+        <p>Local service business site for a UK-based boiler repair company.</p>
+        <a class="port-link" href="https://watfordboilerrepair.co.uk/" target="_blank" rel="noopener">Visit site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
+      </div>
+
+      <div class="port-card">
+        <div class="port-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg></div>
+        <h3>Fahrschule Kimes</h3>
+        <p>Driving school website built for a German-based instructor business.</p>
+        <a class="port-link" href="https://www.fahrschule-kimes.de/" target="_blank" rel="noopener">Visit site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
+      </div>
+
+      <div class="port-card">
+        <div class="port-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"></path></svg></div>
+        <h3>ProfileGazer</h3>
+        <p>Profile and discovery platform with a clean, modern WordPress build.</p>
+        <a class="port-link" href="https://profilegazer.com/" target="_blank" rel="noopener">Visit site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
+      </div>
+
+      <div class="port-card">
+        <div class="port-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"></rect><path d="M9 7h6"></path><path d="M9 12h6"></path><path d="M9 17h3"></path></svg></div>
+        <h3>Asperis</h3>
+        <p>Spanish business website with a focus on clean structure and SEO.</p>
+        <a class="port-link" href="https://www.asperis.es/" target="_blank" rel="noopener">Visit site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
+      </div>
+
+      <div class="port-card">
+        <div class="port-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M5 21V8l7-5 7 5v13"></path><path d="M9 21v-6h6v6"></path></svg></div>
+        <h3>Mortgage Knight</h3>
+        <p>Mortgage brokerage site built to convert visitors into qualified leads.</p>
+        <a class="port-link" href="https://mortgageknight.co.uk/" target="_blank" rel="noopener">Visit site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
+      </div>
+
+      <div class="port-card">
+        <div class="port-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"></path><path d="M21 7v6h-6"></path></svg></div>
+        <h3>Business Wise</h3>
+        <p>Dutch business consultancy site with a structured, professional layout.</p>
+        <a class="port-link" href="https://business-wise.nl/" target="_blank" rel="noopener">Visit site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
+      </div>
+
+      <div class="port-card">
+        <div class="port-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 9 8 11 4.6-2 8-6 8-11V5l-8-3z"></path></svg></div>
+        <h3>ISP Advisor — Marketing & Sales</h3>
+        <p>Marketing and sales landing experience built within the ISP Advisor site.</p>
+        <a class="port-link" href="https://ispadvisor.com/marketing-sales/" target="_blank" rel="noopener">Visit site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
+      </div>
+
+      <div class="port-card">
+        <div class="port-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"></path></svg></div>
+        <h3>Marketing For Trades</h3>
+        <p>Marketing-focused site for Australian trades businesses, built for lead generation.</p>
+        <a class="port-link" href="https://marketingfortrades.com.au/" target="_blank" rel="noopener">Visit site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- CONTACT (v1 style) -->
+  <section id="contact">
+    <div class="contact-box reveal">
+      <h2>Let's build something solid.</h2>
+      <p>Have a WordPress project in mind? I'd love to hear about it.</p>
+      <div class="contact-links">
+        <a class="btn btn-primary" href="mailto:muhmmadasim408@gmail.com">Email me</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/muhammad-asim-28515824a" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-ghost" href="tel:+923109678286">Call me</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div>© <span id="year"></span> Muhammad Asim. Built with care.</div>
+  <div><a href="mailto:muhmmadasim408@gmail.com">muhmmadasim408@gmail.com</a></div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Generic reveal-on-scroll
+  const revealEls = document.querySelectorAll('.reveal, .service-card, .port-card, .exp-row, .skill-group');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el=> io.observe(el));
+
+  // Staggered reveal for service cards
+  document.querySelectorAll('.service-card').forEach((el,i)=>{
+    el.style.transitionDelay = (i % 3) * 0.08 + 's';
+  });
+  document.querySelectorAll('.port-card').forEach((el,i)=>{
+    el.style.transitionDelay = (i % 3) * 0.07 + 's';
+  });
+  document.querySelectorAll('.exp-row').forEach((el,i)=>{
+    el.style.transitionDelay = i * 0.1 + 's';
+  });
+  document.querySelectorAll('.skill-group').forEach((el,i)=>{
+    el.style.transitionDelay = i * 0.12 + 's';
+  });
+</script>
 
 </body>
 </html>
