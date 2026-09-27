@@ -47,9 +47,10 @@
     background:var(--navy-950);
     color:var(--paper);
     font-family:var(--grotesk);
-    overflow-x: hidden;
+    overflow-x:hidden;
     -webkit-font-smoothing:antialiased;
   }
+
   /* subtle grid texture background, v1 signature */
   body::before{
     content:"";
@@ -66,7 +67,7 @@
   a{ color:inherit; text-decoration:none; }
 
   .wrap{
-    max-width:1200px;
+    max-width:1120px;
     margin:0 auto;
     padding:0 32px;
     position:relative;
@@ -124,7 +125,7 @@
     border-bottom:1px solid var(--line-v1);
   }
   nav{
-    max-width:1200px;
+    max-width:1120px;
     margin:0 auto;
     padding:18px 32px;
     display:flex;
@@ -136,7 +137,7 @@
     align-items:center;
   }
   .logo img{
-    height:50px;
+    height:36px;
     width:auto;
     display:block;
   }
@@ -183,8 +184,7 @@
   .hero-grid{
     display:grid;
     grid-template-columns:1.15fr 0.85fr;
-    gap:60px;
-    margin-top:30px;
+    gap:64px;
     align-items:center;
     width:100%;
   }
@@ -315,7 +315,7 @@
   /* ===== ABOUT (v1) ===== */
   .about-row{
     display:grid;
-    grid-template-columns:1.5fr 1.1fr;
+    grid-template-columns:0.9fr 1.1fr;
     gap:64px;
     align-items:start;
   }
@@ -326,8 +326,7 @@
   }
   .stat-grid{
     display:grid;
-    margin-top: -140px;
-    grid-template-columns:repeat(1,1fr);
+    grid-template-columns:repeat(2,1fr);
     gap:20px;
   }
   .stat-card{
@@ -437,7 +436,7 @@
   .exp-list{ border-top:1px solid var(--line); }
   .exp-row{
     display:grid;
-    grid-template-columns:160px 1fr auto;
+    grid-template-columns:140px 1fr auto;
     gap:32px;
     align-items:baseline;
     padding:32px 0;
@@ -605,7 +604,7 @@
     .wrap{ padding:0 20px; }
     .services-grid{ grid-template-columns:1fr; }
     .portfolio-grid{ grid-template-columns:1fr; }
-    .stat-grid{ grid-template-columns:1fr; margin-top: 0px; }
+    .stat-grid{ grid-template-columns:1fr; }
     .skills-cols{ grid-template-columns:1fr; gap:32px; }
     .contact-box{ padding:44px 24px; }
     nav{ padding:16px 20px; }
@@ -622,7 +621,7 @@
 
 <header>
   <nav>
-    <div class="logo"><img src="logo.png" alt="Muhammad Asim logo — replace with your own image"></div>
+    <div class="logo"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCAxNjAgNDAiPgogIDxyZWN0IHdpZHRoPSIxNjAiIGhlaWdodD0iNDAiIHJ4PSI0IiBmaWxsPSIjMTYyMzNkIiBzdHJva2U9IiNmZmI2NDgiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWRhc2hhcnJheT0iNCAzIi8+CiAgPHRleHQgeD0iODAiIHk9IjI1IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjEyIiBmaWxsPSIjZmZiNjQ4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5ZT1VSIExPR088L3RleHQ+Cjwvc3ZnPgo=" alt="Muhammad Asim logo — replace with your own image"></div>
     <div class="nav-links">
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
@@ -642,7 +641,7 @@
       <div>
         <div class="eyebrow">Available for freelance work</div>
         <h1>Building <span class="accent">WordPress</span> sites that load fast and never break.</h1>
-        <p class="lede">I'm a Full Stack WordPress Developer with 4 years of experience designing, developing, and maintaining custom, scalable, performance-driven websites — built on clean code and long-term maintainability.</p>
+        <p class="lede">I'm a WordPress Developer with 4 years of experience designing, developing, and maintaining custom, scalable, performance-driven websites — built on clean code and long-term maintainability.</p>
         <div class="hero-actions">
           <a href="#work" class="btn btn-primary">View my work →</a>
           <a href="#contact" class="btn btn-ghost">Contact me</a>
@@ -656,7 +655,7 @@
         <div class="code-body">
           <div><span class="ln">01</span><span class="kw">class</span> <span class="fn">Developer</span> {</div>
           <div><span class="ln">02</span>&nbsp;&nbsp;<span class="prop">$name</span> = <span class="str">'Muhammad Asim'</span>;</div>
-          <div><span class="ln">03</span>&nbsp;&nbsp;<span class="prop">$role</span> = <span class="str">'Web Dev'</span>;</div>
+          <div><span class="ln">03</span>&nbsp;&nbsp;<span class="prop">$role</span> = <span class="str">'WordPress Dev'</span>;</div>
           <div><span class="ln">04</span>&nbsp;&nbsp;<span class="prop">$experience</span> = <span class="str">'4 years'</span>;</div>
           <div><span class="ln">05</span>&nbsp;&nbsp;<span class="prop">$stack</span> = [<span class="str">'Elementor'</span>,</div>
           <div><span class="ln">06</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'Divi'</span>, <span class="str">'CPT'</span>, <span class="str">'SEO'</span>];</div>
@@ -675,8 +674,8 @@
     <div class="about-row">
       <p class="reveal">I am a dedicated WordPress Developer with 4 years of professional experience in designing, developing, and maintaining high-quality WordPress websites. I specialize in delivering custom, scalable, and performance-driven WordPress solutions tailored to business needs. With a strong command of WordPress core, themes, plugins, and modern page builders, I help clients build secure, SEO-friendly, and user-focused websites. I believe in clean coding standards, attention to detail, and long-term maintainability.</p>
       <div class="stat-grid">
-        <!-- <div class="stat-card reveal"><div class="stat-num">4</div><div class="stat-label">Years of experience</div></div> -->
-        <div class="stat-card reveal"><div class="stat-num">50+</div><div class="stat-label">Live websites shipped</div></div>
+        <div class="stat-card reveal"><div class="stat-num">4</div><div class="stat-label">Years of experience</div></div>
+        <div class="stat-card reveal"><div class="stat-num">40+</div><div class="stat-label">Live websites shipped</div></div>
         <div class="stat-card reveal"><div class="stat-num">3</div><div class="stat-label">Companies worked with</div></div>
         <div class="stat-card reveal"><div class="stat-num">100%</div><div class="stat-label">Responsive builds</div></div>
       </div>
@@ -803,7 +802,7 @@
         <span class="exp-current">Current role</span>
       </div>
       <div class="exp-row">
-        <span class="exp-date">May 2024 — Nov 2024</span>
+        <span class="exp-date">Jul 2024 — Nov 2024</span>
         <div>
           <div class="exp-role">WordPress Front-End Developer</div>
           <div class="exp-company">The 7 Technologies</div>
@@ -811,7 +810,7 @@
         <span></span>
       </div>
       <div class="exp-row">
-        <span class="exp-date">Apr 2022 — May 2024</span>
+        <span class="exp-date">Apr 2022 — Oct 2024</span>
         <div>
           <div class="exp-role">WordPress Developer</div>
           <div class="exp-company">AsianITHouse</div>
@@ -946,5 +945,6 @@
     el.style.transitionDelay = i * 0.12 + 's';
   });
 </script>
+
 </body>
 </html>
